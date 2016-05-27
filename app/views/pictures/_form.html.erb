@@ -17,6 +17,10 @@
     <%= f.text_field :name %>
   </div>
   <div class="field">
+    <%= f.label :tags, "タグ" %><br>
+    <%= text_field_tag 'user[tag]', @user.tag.join(',') %>
+  </div>
+  <div class="field">
     <%= f.file_field :photo %>
   </div>
   <div class="actions">

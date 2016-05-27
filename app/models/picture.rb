@@ -10,4 +10,6 @@ class Picture < ActiveRecord::Base
       less_than: 5.megabytes, # ファイルサイズのチェック
   content_type: { content_type: ["image/jpg", "image/jpeg", "image/png", "image/gif"] }
                   # ファイルの拡張子を指定（これがないとエラーが発生する）
+                  
+  acts_as_ordered_taggable_on :tags
 end
