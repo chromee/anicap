@@ -1,0 +1,18 @@
+<p id="notice"><%= notice %></p>
+
+<h1>キャプコレにようこそ</h1>
+<h2>
+  このサイトは主に、LTやtwitterのリプに使う
+    アニメのキャプチャー画像を共有することを目的に作られています
+</h2>
+
+  <% @pictures.each do |picture| %>
+  <div class="capItems">
+      <%= link_to image_tag(picture.photo.url(:medium)) , picture%>
+      <p><%= picture.name %></p>
+  </div>
+  <% end %>
+
+<div class="clear"><button ><%= link_to 'New Picture', new_picture_path %></button></div>
+
+

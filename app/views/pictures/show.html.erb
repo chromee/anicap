@@ -1,0 +1,16 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @picture.name %>
+</p>
+
+<p>
+   <!--- Modelのstyleで指定した :midium など渡すことでサイズを指定できる -->
+   <%= image_tag @picture.photo.url(:original) %>
+</p>
+
+<%= link_to 'Edit', edit_picture_path(@picture) %> |
+<%= link_to 'Back', pictures_path %> |
+<%= link_to 'Destroy', @picture, method: :delete, data: { confirm: 'Are you sure?' } %>
+
