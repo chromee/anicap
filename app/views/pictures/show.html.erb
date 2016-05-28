@@ -1,13 +1,19 @@
 <p id="notice"><%= notice %></p>
 
+
 <p>
   <strong>Name:</strong>
   <%= @picture.name %>
 </p>
 
+
+<p>
+  <%= render 'pictures/tag_list', tag_list: @picture.tag_list %>
+</p>
+
 <p>
    <!--- Modelのstyleで指定した :midium など渡すことでサイズを指定できる -->
-   <%= image_tag @picture.photo.url(:original) %>
+   <%= link_to image_tag(@picture.photo.url(:large)) , @picture.photo.url(:original)%>
 </p>
 
 <%= link_to 'Edit', edit_picture_path(@picture) %> |

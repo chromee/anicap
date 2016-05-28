@@ -12,6 +12,7 @@ gem 'sdoc',         '0.4.0', group: :doc
 
 gem "paperclip"
 gem 'acts-as-taggable-on', '~> 3.4'
+gem 'bootstrap-tagsinput-rails'
 
 group :development, :test do
   gem 'sqlite3',     '1.3.9'

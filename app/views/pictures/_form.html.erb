@@ -1,7 +1,8 @@
 <%= form_for(@picture) do |f| %>
   <% if @picture.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@picture.errors.count, "error") %> prohibited this picture from being saved:</h2>
+      <h2><%= pluralize(@picture.errors.count, "error") %> 
+                  prohibited this picture from being saved:</h2>
 
       <ul>
       <% @picture.errors.full_messages.each do |message| %>
@@ -15,11 +16,13 @@
   <div class="field">
     <%= f.label :name %><br>
     <%= f.text_field :name %>
+
+ <div class="field">
+    <%= f.label :tag_list, "タグ(カンマ区切り)" %><br>
+    <%= text_field_tag 'picture[tag_list]', 
+          @picture.tag_list.join(','), "data-role" => "tagsinput"%>
   </div>
-  <div class="field">
-    <%= f.label :tags, "タグ" %><br>
-    <%= text_field_tag 'user[tag]', @user.tag.join(',') %>
-  </div>
+
   <div class="field">
     <%= f.file_field :photo %>
   </div>
