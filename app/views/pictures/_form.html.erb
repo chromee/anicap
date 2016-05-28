@@ -16,16 +16,18 @@
   <div class="field">
     <%= f.label :name %><br>
     <%= f.text_field :name %>
-
- <div class="field">
+  </div>
+  <div class="field">
     <%= f.label :tag_list, "タグ(カンマ区切り)" %><br>
     <%= text_field_tag 'picture[tag_list]', 
-          @picture.tag_list.join(','), "data-role" => "tagsinput"%>
+          @picture.tag_list.join(','), 'data-role' => 'tagsinput'%>
   </div>
-
+  
+    <%= @picture.photo.present? ? image_tag(@picture.photo.url(:medium)) : "no Image" %>
   <div class="field">
     <%= f.file_field :photo %>
   </div>
+  
   <div class="actions">
     <%= f.submit %>
   </div> 
