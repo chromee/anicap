@@ -32,13 +32,6 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1;
 }
 
-h1 {
-  font-size: 3em;
-  letter-spacing: -2px;
-  margin-bottom: 30px;
-  text-align: center;
-}
-
 h2 {
   font-size: 1.2em;
   letter-spacing: -1px;
@@ -116,5 +109,13 @@ footer {
 /* tool */
 .clear{
   clear: both;
+}
+
+.center{
+  text-align: center;
+}
+
+.bootstrap-tagsinput {
+  width: 100% !important;
 }
 
