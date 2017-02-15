@@ -1,4 +1,4 @@
-<%= form_for(@picture) do |f| %>
+<%= form_for @picture, class: "form-horizontal panel" do |f| %>
   <% if @picture.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@picture.errors.count, "error") %> 
@@ -12,24 +12,24 @@
     </div>
   <% end %>
   
-
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :tag_list, "タグ(カンマ区切り)" %><br>
-    <%= text_field_tag 'picture[tag_list]', 
-          @picture.tag_list.join(','), 'data-role' => 'tagsinput'%>
+  <div class="form-group row">
+    <%= f.label :name, class: "col-sm-2 col-sm-offset-1" %>
+    <%= f.text_field :name, class: "form-control col-sm-4" %>
   </div>
   
-    <%= @picture.photo.present? ? image_tag(@picture.photo.url(:medium)) : "no Image" %>
-  <div class="field">
-    <%= f.file_field :photo %>
+  <div class="form-group row">
+    <%= f.label :tag_list, "タグ(カンマ区切り)", class: "col-sm-2 col-sm-offset-1" %>
+    <%= text_field_tag 'picture[tag_list]', 
+          @picture.tag_list.join(','), 'data-role' => 'tagsinput', class: "form-control col-sm-6" %>
+  </div>
+  
+    <%= @picture.photo.present? ? image_tag(@picture.photo.url(:large)) : "no Image" %>
+  <div class="form-group">
+    <%= f.file_field :photo, class: "filestyle" %>
   </div>
   
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit class: "btn btn-primary" %>
   </div> 
 <% end %>
 
