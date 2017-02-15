@@ -2,7 +2,13 @@ class PicturesController < ApplicationController
   before_action :set_picture, only: [:show, :edit, :update, :destroy]
 
   def index
-    @pictures = Picture.all
+    if params[:search].present?
+      keywords = params[:search].split("　").join(" ").split
+      @pictures = Picture.tagged_with keywords, any: true
+      @pictures = @pictures.page(params[:page]).per(9)
+    else
+      @pictures = Picture.all.order("id desc").page(params[:page]).per(9)
+    end
   end
 
   def show
@@ -19,23 +25,28 @@ class PicturesController < ApplicationController
     @picture = Picture.new(picture_params)
 
     if @picture.save
-      redirect_to @picture, notice: 'Picture was successfully created.'
+      flash[:success] = "画像がアップロードされました。"
+      redirect_to @picture
     else
       render :new
+      flash[:error] = "画像のアップロードに失敗しました。"
     end
   end
 
   def update
     if @picture.update(picture_params)
-      redirect_to @picture, notice: 'Picture was successfully updated.'
+      flash[:success] = "情報が更新されました。"
+      redirect_to @picture
     else
       render :edit
+      flash[:error] = "情報の更新に失敗しました。"
     end
   end
 
   def destroy
     @picture.destroy
-    redirect_to pictures_url, notice: 'Picture was successfully destroyed.'
+    flash[:success] = "画像が削除されました。"
+    redirect_to pictures_url
   end
 
   private
