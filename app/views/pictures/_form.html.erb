@@ -14,20 +14,45 @@
   
   <div class="form-group row">
     <%= f.label :name, class: "col-sm-2 col-sm-offset-1" %>
-    <%= f.text_field :name, class: "form-control col-sm-4" %>
+    <div class="col-sm-6"><%= f.text_field :name, class: "form-control" %></div>
   </div>
   
   <div class="form-group row">
     <%= f.label :tag_list, "タグ(カンマ区切り)", class: "col-sm-2 col-sm-offset-1" %>
-    <%= text_field_tag 'picture[tag_list]', 
-          @picture.tag_list.join(','), 'data-role' => 'tagsinput', class: "form-control col-sm-6" %>
+    <div class="col-sm-6">
+      <%= text_field_tag 'picture[tag_list]', @picture.tag_list.join(', '), "data-role" => "tagsinput", class: "form-control" %>
+    </div>
+    <script>
+      $(function() {
+        $("input[data-role=tagsinput], select[multiple][data-role=tagsinput]").tagsinput();
+      });
+    </script>
   </div>
-  
-    <%= @picture.photo.present? ? image_tag(@picture.photo.url(:large)) : "no Image" %>
-  <div class="form-group">
-    <%= f.file_field :photo, class: "filestyle" %>
+
+  <div class="form-group row">
+    <%= f.label :photo, "画像", class: "col-sm-2 col-sm-offset-1" %>
+    <div class="col-sm-6">
+      <%= f.file_field :photo, id: "photo" , style: "display:none" %>
+      <div class="input-group">
+        <input type="text" id="photoCover" class="form-control" placeholder="select file...">
+        <span class="input-group-btn"><button type="button" class="btn btn-info" id="browser-btn">Browse</button></span>
+      </div>
+
+      <script>
+        $("#photo").change(function() {
+          $('#photoCover').val($(this).val());
+        });
+        $("#browser-btn").on("click", function(){
+          $("#photo").click();
+        });
+      </script>
+    </div>
   </div>
-  
+
+  <div class="form-group row">
+    <div class="center"><%= @picture.photo.present? ? image_tag(@picture.photo.url(:large)) : "no Image" %></div>
+  </div>
+
   <div class="actions">
     <%= f.submit class: "btn btn-primary" %>
   </div> 
