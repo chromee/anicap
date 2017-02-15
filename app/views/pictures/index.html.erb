@@ -1,28 +1,22 @@
-<p id="notice"><%= notice %></p>
+<h1 class="center" style="margin-bottom: 40px;">キャプコレ</h1>
 
-<h1>キャプコレ</h1>
+<%= paginate(@pictures) %>
 
-<div>
-  <table cellpadding="5px" cellspacing="30px">
-    <tbody>
+<table cellpadding="5px" cellspacing="30px" align="center" class="center">
+  <tbody>
+    <tr>
     <% @pictures.each_with_index do |picture, i| %>
-      <% if i == 0 %>
-        <tr>
-      <% end %>
-        <td align="center">
-          <%= link_to image_tag(picture.photo.url(:medium)) , picture%>
-          <p><%= picture.name %></p>
-        </td>
-      <% if (i+1) % 3 == 0  %>
-        </tr>
-        <tr>
-      <% end %>
+      <td>
+        <%= link_to image_tag(picture.photo.url(:medium)), picture%>
+        <p><%= link_to picture.name, picture %></p>
+      </td>
+    <% if (i+1) % 3 == 0  %>
+      </tr>
+      <tr>
+    <% end %>
     <% end %>
     </tr>
-    </tbody>
-  </table>
-</div>
-  
+  </tbody>
+</table>
 
-
-
+<%= paginate(@pictures) %>
