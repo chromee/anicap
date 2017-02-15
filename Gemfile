@@ -13,6 +13,7 @@ gem 'acts-as-taggable-on', '~> 3.4'
 gem 'bootstrap-tagsinput-rails'
 gem 'paperclip'
 gem 'nokogiri'
+gem "kaminari"
 
 group :development, :test do
   gem 'sqlite3',     '1.3.9'
