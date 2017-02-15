@@ -14,6 +14,9 @@ gem 'bootstrap-tagsinput-rails'
 gem 'paperclip'
 gem 'nokogiri'
 gem "kaminari"
+gem 'therubyracer'
+gem 'less-rails'
+gem 'twitter-bootstrap-rails'
 
 group :development, :test do
   gem 'sqlite3',     '1.3.9'
