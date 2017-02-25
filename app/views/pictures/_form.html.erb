@@ -1,3 +1,40 @@
+<script>
+  $("#photo").change(function() {
+    $('#photoCoverTextField').val($(this).val());
+  });
+  $("#browser-btn").on("click", function(){
+    $("#photo").click();
+  });
+
+  $('form').on('change', 'input[type="file"]', function(e) {
+    var file = e.target.files[0],
+        reader = new FileReader(),
+        $preview = $(".cap_image");
+
+    // 画像ファイル以外の場合は何もしない
+    if(file.type.indexOf("image") < 0){
+      return false;
+    }
+
+    // ファイル読み込みが完了した際のイベント登録
+    reader.onload = (function(file) {
+      return function(e) {
+        //既存のプレビューを削除
+        $preview.empty();
+        //.prevewの領域の中にロードした画像を表示するimageタグを追加
+        $preview.append($('<img>').attr({
+                  src: e.target.result,
+                  width: "300px",
+                  class: "cap_image center",
+                  title: file.name
+              }));
+      };
+    })(file);
+
+    reader.readAsDataURL(file);
+  });
+</script>
+
 <%= form_for @picture, class: "form-horizontal panel" do |f| %>
   <% if @picture.errors.any? %>
     <div id="error_explanation">
@@ -32,25 +69,16 @@
   <div class="form-group row">
     <%= f.label :photo, "画像", class: "col-sm-2 col-sm-offset-1" %>
     <div class="col-sm-6">
-      <%= f.file_field :photo, id: "photo" , style: "display:none" %>
+      <%= f.file_field :photo, id: "photo", style: "display:none" %>
       <div class="input-group">
-        <input type="text" id="photoCover" class="form-control" placeholder="select file...">
+        <input type="text" id="photoCoverTextField" class="form-control" placeholder="select file...">
         <span class="input-group-btn"><button type="button" class="btn btn-info" id="browser-btn">Browse</button></span>
       </div>
-
-      <script>
-        $("#photo").change(function() {
-          $('#photoCover').val($(this).val());
-        });
-        $("#browser-btn").on("click", function(){
-          $("#photo").click();
-        });
-      </script>
     </div>
   </div>
 
-  <div class="form-group row">
-    <div class="center"><%= @picture.photo.present? ? image_tag(@picture.photo.url(:large)) : "no Image" %></div>
+  <div class="form-group">
+    <div class="center cap_image"><%= @picture.photo.present? ? image_tag(@picture.photo.url(:large)) : "no Image" %></div>
   </div>
 
   <div class="actions">
