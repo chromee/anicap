@@ -12,7 +12,6 @@ gem 'sdoc',         '0.4.0', group: :doc
 gem 'acts-as-taggable-on', '~> 3.4'
 gem 'bootstrap-tagsinput-rails'
 gem 'paperclip'
-gem 'nokogiri'
 gem "kaminari"
 gem 'therubyracer'
 gem 'less-rails'

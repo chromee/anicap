@@ -1,5 +1,6 @@
 class PicturesController < ApplicationController
   before_action :set_picture, only: [:show, :edit, :update, :destroy]
+  protect_from_forgery except: [:create]
 
   def index
     if params[:search].present?
@@ -24,13 +25,24 @@ class PicturesController < ApplicationController
   def create
     @picture = Picture.new(picture_params)
 
-    if @picture.save
-      flash[:success] = "画像がアップロードされました。"
-      redirect_to @picture
-    else
-      render :new
-      flash[:error] = "画像のアップロードに失敗しました。"
+    respond_to do |format|
+      if @picture.save
+        format.html do
+          flash[:success] = "画像がアップロードされました。"
+         redirect_to @picture
+        end
+        format.json { render :show, status: :created, location: @picture }
+
+      else
+        format.html do
+          render :new
+          flash[:error] = "画像のアップロードに失敗しました。"
+        end
+        format.json { render json: @picture.errors, status: :unprocessable_entity }
+      end
     end
+
+
   end
 
   def update
@@ -55,6 +67,11 @@ class PicturesController < ApplicationController
     end
     
     def picture_params
-      params.require(:picture).permit(:name, :photo, :tag_list)
+      if request.path_parameters[:format] == "json"
+        json_request = ActionController::Parameters.new(JSON.parse(request.body.read))
+        json_request.require(:picture).permit(:name, :photo, :tag_list)
+      else
+        params.require(:picture).permit(:name, :photo, :tag_list)
+      end
     end
 end
