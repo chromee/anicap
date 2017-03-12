@@ -1,14 +1,17 @@
 class PicturesController < ApplicationController
   before_action :set_picture, only: [:show, :edit, :update, :destroy]
   protect_from_forgery except: [:create]
+  before_action :set_page, only: [:index, :show, :new]
+  
+  PER_PAGE = 12
 
   def index
     if params[:search].present?
       keywords = params[:search].split("　").join(" ").split
       @pictures = Picture.tagged_with keywords, any: true
-      @pictures = @pictures.page(params[:page]).per(9)
+      @pictures = @pictures.page(params[:page]).per(PER_PAGE)
     else
-      @pictures = Picture.all.order("id desc").page(params[:page]).per(9)
+      @pictures = Picture.all.order("id desc").page(params[:page]).per(PER_PAGE)
     end
   end
 
@@ -73,5 +76,9 @@ class PicturesController < ApplicationController
       else
         params.require(:picture).permit(:name, :photo, :tag_list)
       end
+    end
+    
+    def set_page
+      @page = params[:page]
     end
 end

@@ -1,15 +1,18 @@
 <h1 class="title">キャプコレ</h1>
 
-<%= paginate(@pictures) %>
+<div style="margin-left: 100px;">
+  <%= paginate(@pictures) %>
+</div>
 
 <table cellpadding="5px" cellspacing="30px" align="center" class="center">
   <tbody>
     <tr>
     <% @pictures.each_with_index do |picture, i| %>
       <td>
-        <%= link_to image_tag(picture.photo.url(:medium)), picture%>
+        <%= link_to image_tag(picture.photo.url(:medium)), picture_path(picture) %>
         <p><%= link_to picture.name, picture %></p>
       </td>
+      <td>　</td>
     <% if (i+1) % 3 == 0  %>
       </tr>
       <tr>
@@ -19,4 +22,6 @@
   </tbody>
 </table>
 
-<%= paginate(@pictures) %>
+<div style="margin-left: 100px;">
+  <%= paginate(@pictures) %>
+</div>

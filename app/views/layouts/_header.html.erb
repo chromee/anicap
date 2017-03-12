@@ -1,12 +1,11 @@
 <header class="navbar navbar-fixed-top navbar-inverse">
-  <div id="headLine">
-    <%= link_to "AnicapCollctor", pictures_path, id: "logo" %>
+  <div class="container">
+    <%= link_to "Cap Colle", pictures_path, id: "logo" %>
     <nav>
       <ul class="nav navbar-nav navbar-right" id="Rheader">
-        <li><%= link_to "Home",   pictures_path %></li>
         <li><%= link_to "Upload", new_picture_path %></li>
         <li>
-          <%= form_tag pictures_path, method: :get, class: "form-inline navbar-form", style: "margin-top:10px;" do %>
+          <%= form_tag pictures_path, method: :get, class: "form-inline navbar-form", style: "margin-top:10px; padding-right: 0;" do %>
             <div class="form-group">
               <%= text_field_tag :search, "", class: "form-control", placeholder: "タグで検索" %>
             </div>

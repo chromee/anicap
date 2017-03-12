@@ -1,19 +1,28 @@
-<h1 class="center">
-  <strong>Name:</strong>
-  <%= @picture.name %>
-</h1><br>
-
-<h3 class="center">
-  <% @picture.tag_list.each do |tag| %>
-    <span class="label label-primary"><%= tag %></span>
-  <% end %>
-</h3><br>
-
-<p class="center"><%= link_to image_tag(@picture.photo.url(:large)) , @picture.photo.url(:original) %></p>
-
-<h3 class="center">
-  <%= link_to 'Edit', edit_picture_path(@picture) %> |
-  <%= link_to 'Destroy', @picture, method: :delete, data: { confirm: 'Are you sure?' } %> |
-  <%= link_to 'Back', pictures_path %>
-</h3>
-
+<div class="center">
+  <h1 class="title">
+    <%= @picture.name %>
+  </h1>
+  
+  <div class="tag-list">
+    <ul class="list-inline">
+      <span class="glyphicon glyphicon-tags" aria-hidden="true" id="tag-icon" style="<%= @picture.tag_list.present? ? 'top: 10px;' : 'top: 3px;' %>"></span>
+      <% @picture.tag_list.each do |tag| %>
+        <li>
+          <span class="label label-primary">
+            <%= link_to tag, pictures_path(search: tag), class: "tag" %>
+          </span>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+  
+  
+  <p><%= link_to image_tag(@picture.photo.url(:large)) , @picture.photo.url(:original), target: ["_blank"] %></p>
+  
+  <h3>
+    <ul class="list-inline">
+      <li><%= link_to '編集', edit_picture_path(@picture), class: "btn btn-primary btn-lg" %></li>
+      <li><%= link_to '削除', @picture, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-primary btn-lg" %></li>
+    </ul>
+  </h3>
+</div>
