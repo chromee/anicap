@@ -3,11 +3,11 @@ class PicturesController < ApplicationController
   protect_from_forgery except: [:create]
   before_action :set_page, only: [:index, :show, :new]
   
-  PER_PAGE = 24
+  PER_PAGE = 12
 
   def index
     if params[:search].present?
-      keywords = params[:search].split("　").join(" ").split
+      keywords = params[:search].split(",")
       @pictures = Picture.tagged_with keywords, any: true
       @pictures = @pictures.page(params[:page]).per(PER_PAGE)
     else
