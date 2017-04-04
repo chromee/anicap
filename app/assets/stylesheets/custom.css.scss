@@ -6,8 +6,14 @@
 $gray-medium-light: #eaeaea;
 
 /* universal */
+html, body{
+  height: 100%;
+}
 
-body {
+#wrap{
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
   padding-top: 60px;
 }
 
@@ -27,7 +33,6 @@ header{
     height:55px;
   }
 }
-
 
 #logo {
   float: left;
@@ -50,6 +55,7 @@ header{
 /* footer */
 
 footer {
+  height: 80px;
   margin-top: 40px;
   a {
     color: white;
@@ -88,8 +94,8 @@ footer {
 
 .tag-list{
   background-color: #EDF3F7;
-  width: 1000px;
-  margin-left: 70px;
+  width: 90%;
+  margin: auto;
   margin-bottom: 25px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -144,8 +150,6 @@ footer {
 }
 
 .container{
-  max-width: none !important;
-  width: 1170px !important;
   background-color: white;
   margin-top: 20px;
   margin-bottom: 20px;
@@ -167,5 +171,11 @@ footer {
 .total_count{
   margin-top: 20px;
   margin-left: 100px;
+}
+
+.show_img{
+  img{
+    width: 90%;
+  }
 }
 
