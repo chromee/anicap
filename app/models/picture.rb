@@ -2,16 +2,16 @@ class Picture < ActiveRecord::Base
   attr_accessor :content_type, :original_filename, :image_data
   before_save :decode_base64_image
 
-   # photoをattachファイルとする。stylesで画像サイズを定義できる
-  has_attached_file :photo, 
-  :styles => { large:"1000x1000",medium: "300x300>" },
-  :url  => "/assets/arts/:id/:style/:basename.:extension", # 画像保存先のURL先
-	:path => "#{Rails.root}/public/assets/arts/:id/:style/:basename.:extension" # サーバ上の画像保存先パス
-  
+  paperclip_opts = {styles: { large:"1000x1000", medium: "300x300>" } ,
+                    url: "/assets/arts/:id/:style/:basename.:extension",
+                    path: "#{Rails.root}/public/assets/arts/:id/:style/:basename.:extension"}
+
+  has_attached_file :photo, paperclip_opts
+
   validates_attachment :photo, 
-  # presence: true,
-  less_than: 5.megabytes, # ファイルサイズのチェック
-  content_type: { content_type: ["image/jpg", "image/jpeg", "image/png", "image/gif"] }
+    presence: true,
+    less_than: 5.megabytes,
+    content_type: { content_type: ["image/jpg", "image/jpeg", "image/png", "image/gif"] }
                   
   acts_as_ordered_taggable_on :tags
 
