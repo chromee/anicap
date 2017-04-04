@@ -16,6 +16,8 @@ gem "kaminari"
 gem 'therubyracer'
 gem 'less-rails'
 gem 'twitter-bootstrap-rails'
+gem 'aws-sdk'
+gem 'paperclip-azure'
 
 group :development, :test do
   gem 'sqlite3',     '1.3.9'
@@ -28,6 +30,6 @@ group :development, :test do
 end
 
 group :production do
-  gem 'pg',             '0.17.1'
+  gem 'mysql'
   gem 'rails_12factor', '0.0.2'
 end
