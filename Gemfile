@@ -17,6 +17,7 @@ gem 'therubyracer'
 gem 'less-rails'
 gem 'twitter-bootstrap-rails'
 gem 'mysql2', '~> 0.3.20'
+gem 'unicorn'
 
 group :development, :test do
   gem 'byebug',      '3.4.0'

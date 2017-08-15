@@ -207,6 +207,9 @@ GEM
     uglifier (2.5.3)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    unicorn (5.3.0)
+      kgio (~> 2.6)
+      raindrops (~> 0.7)
     web-console (2.0.0.beta3)
       activemodel (~> 4.0)
       binding_of_caller (= 0.7.3.pre1)
@@ -241,6 +244,7 @@ DEPENDENCIES
   turbolinks (= 2.3.0)
   twitter-bootstrap-rails
   uglifier (= 2.5.3)
+  unicorn
   web-console (= 2.0.0.beta3)
 
 BUNDLED WITH
