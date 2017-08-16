@@ -29,8 +29,6 @@ services:
     extends:
       file: ./docker/mysql/password.yml
       service: password
-    stdin: true
-    tty: true
   db:
     build:
       context: .
@@ -46,5 +44,3 @@ services:
     extends:
       file: ./docker/mysql/password.yml
       service: password
-    stdin: true
-    tty: true
