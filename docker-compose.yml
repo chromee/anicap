@@ -6,16 +6,6 @@ services:
       - /share
       - ./docker/mysql/volumes:/var/lib/mysql
       - /etc/localtime:/etc/localtime:ro
-  server:
-    build:
-      context: .
-      dockerfile: ./docker/nginx/Dockerfile
-    ports:
-      - '80:80'
-    volumes_from:
-      - datastore
-    depends_on:
-      - datastore
   web:
     build:
       context: .
