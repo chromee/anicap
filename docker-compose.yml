@@ -6,11 +6,13 @@ services:
       - /share
       - ./docker/mysql/volumes:/var/lib/mysql
       - /etc/localtime:/etc/localtime:ro
-  web:
+  app:
     build:
       context: .
       dockerfile: ./docker/rails/Dockerfile
     command: bundle exec unicorn -p 3000 -c /app/config/unicorn.rb
+    net:
+      - sushi
     ports:
       - '3000:3000'
     volumes:
@@ -27,10 +29,14 @@ services:
     extends:
       file: ./docker/mysql/password.yml
       service: password
+    stdin: true
+    tty: true
   db:
     build:
       context: .
       dockerfile: ./docker/mysql/Dockerfile
+    net:
+      - sushi
     ports:
       - '3306:3306'
     volumes_from:
@@ -40,3 +46,5 @@ services:
     extends:
       file: ./docker/mysql/password.yml
       service: password
+    stdin: true
+    tty: true
