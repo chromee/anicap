@@ -11,8 +11,7 @@ services:
       context: .
       dockerfile: ./docker/rails/Dockerfile
     command: bundle exec unicorn -p 3000 -c /app/config/unicorn.rb
-    networks:
-      - sushi
+    network_mode: 'sushi'
     ports:
       - '3000:3000'
     volumes:
@@ -33,8 +32,7 @@ services:
     build:
       context: .
       dockerfile: ./docker/mysql/Dockerfile
-    networks:
-      - sushi
+    network_mode: 'sushi'
     ports:
       - '3306:3306'
     volumes_from:
