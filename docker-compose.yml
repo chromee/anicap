@@ -1,21 +1,13 @@
 version: '2'
 services:
+
   datastore:
     image: busybox
     volumes:
       - /share
       - ./docker/mysql/volumes:/var/lib/mysql
       - /etc/localtime:/etc/localtime:ro
-  # server:
-  #   build:
-  #     context: .
-  #     dockerfile: ./docker/nginx/Dockerfile
-  #   ports:
-  #     - '10000:80'
-  #   volumes_from:
-  #     - datastore
-  #   depends_on:
-  #      - datastore
+
   app:
     build:
       context: .
@@ -38,11 +30,13 @@ services:
     extends:
       file: ./docker/mysql/password.yml
       service: password
+    network_mode: sushi
+
   db:
     build:
       context: .
       dockerfile: ./docker/mysql/Dockerfile
-    network_mode: 'sushi'
+    network_mode: sushi
     ports:
       - '3306'
     volumes_from:
